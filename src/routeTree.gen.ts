@@ -10,8 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BloomRouteImport } from './routes/bloom'
 import { Route as DatasetsRouteImport } from './routes/datasets'
 import { Route as LiveRouteImport } from './routes/live'
+import { Route as MapreduceRouteImport } from './routes/mapreduce'
+import { Route as NetworkRouteImport } from './routes/network'
 import { Route as SentimentRouteImport } from './routes/sentiment'
 import { Route as SourcesRouteImport } from './routes/sources'
 import { Route as TrendsRouteImport } from './routes/trends'
@@ -19,6 +22,11 @@ import { Route as TrendsRouteImport } from './routes/trends'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BloomRoute = BloomRouteImport.update({
+  id: '/bloom',
+  path: '/bloom',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DatasetsRoute = DatasetsRouteImport.update({
@@ -29,6 +37,16 @@ const DatasetsRoute = DatasetsRouteImport.update({
 const LiveRoute = LiveRouteImport.update({
   id: '/live',
   path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MapreduceRoute = MapreduceRouteImport.update({
+  id: '/mapreduce',
+  path: '/mapreduce',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworkRoute = NetworkRouteImport.update({
+  id: '/network',
+  path: '/network',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SentimentRoute = SentimentRouteImport.update({
@@ -49,16 +67,22 @@ const TrendsRoute = TrendsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bloom': typeof BloomRoute
   '/datasets': typeof DatasetsRoute
   '/live': typeof LiveRoute
+  '/mapreduce': typeof MapreduceRoute
+  '/network': typeof NetworkRoute
   '/sentiment': typeof SentimentRoute
   '/sources': typeof SourcesRoute
   '/trends': typeof TrendsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bloom': typeof BloomRoute
   '/datasets': typeof DatasetsRoute
   '/live': typeof LiveRoute
+  '/mapreduce': typeof MapreduceRoute
+  '/network': typeof NetworkRoute
   '/sentiment': typeof SentimentRoute
   '/sources': typeof SourcesRoute
   '/trends': typeof TrendsRoute
@@ -66,22 +90,46 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bloom': typeof BloomRoute
   '/datasets': typeof DatasetsRoute
   '/live': typeof LiveRoute
+  '/mapreduce': typeof MapreduceRoute
+  '/network': typeof NetworkRoute
   '/sentiment': typeof SentimentRoute
   '/sources': typeof SourcesRoute
   '/trends': typeof TrendsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/datasets' | '/live' | '/sentiment' | '/sources' | '/trends'
+  fullPaths:
+    | '/'
+    | '/bloom'
+    | '/datasets'
+    | '/live'
+    | '/mapreduce'
+    | '/network'
+    | '/sentiment'
+    | '/sources'
+    | '/trends'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/datasets' | '/live' | '/sentiment' | '/sources' | '/trends'
+  to:
+    | '/'
+    | '/bloom'
+    | '/datasets'
+    | '/live'
+    | '/mapreduce'
+    | '/network'
+    | '/sentiment'
+    | '/sources'
+    | '/trends'
   id:
     | '__root__'
     | '/'
+    | '/bloom'
     | '/datasets'
     | '/live'
+    | '/mapreduce'
+    | '/network'
     | '/sentiment'
     | '/sources'
     | '/trends'
@@ -89,8 +137,11 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BloomRoute: typeof BloomRoute
   DatasetsRoute: typeof DatasetsRoute
   LiveRoute: typeof LiveRoute
+  MapreduceRoute: typeof MapreduceRoute
+  NetworkRoute: typeof NetworkRoute
   SentimentRoute: typeof SentimentRoute
   SourcesRoute: typeof SourcesRoute
   TrendsRoute: typeof TrendsRoute
@@ -105,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bloom': {
+      id: '/bloom'
+      path: '/bloom'
+      fullPath: '/bloom'
+      preLoaderRoute: typeof BloomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/datasets': {
       id: '/datasets'
       path: '/datasets'
@@ -117,6 +175,20 @@ declare module '@tanstack/react-router' {
       path: '/live'
       fullPath: '/live'
       preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mapreduce': {
+      id: '/mapreduce'
+      path: '/mapreduce'
+      fullPath: '/mapreduce'
+      preLoaderRoute: typeof MapreduceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/network': {
+      id: '/network'
+      path: '/network'
+      fullPath: '/network'
+      preLoaderRoute: typeof NetworkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sentiment': {
@@ -145,8 +217,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BloomRoute: BloomRoute,
   DatasetsRoute: DatasetsRoute,
   LiveRoute: LiveRoute,
+  MapreduceRoute: MapreduceRoute,
+  NetworkRoute: NetworkRoute,
   SentimentRoute: SentimentRoute,
   SourcesRoute: SourcesRoute,
   TrendsRoute: TrendsRoute,
